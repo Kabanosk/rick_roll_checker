@@ -5,6 +5,15 @@
     <title>Results</title>
 </head>
 <body>
-    <h1>{{url}}</h1>
+    {% if is_rick_roll %}
+        <h1>Be careful it can be Rick Roll</h1>
+    {% else %}
+        <h1>That is not Rick Roll</h1>
+    {% endif %}
+    <form method="post">
+        <button type="submit" name="go back" value="back">
+            Check another link!
+        </button>
+    </form>
 </body>
 </html>
