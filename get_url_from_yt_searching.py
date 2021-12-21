@@ -1,9 +1,7 @@
 import re
 import requests
 
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
+from checker import db
 
 
 SEARCHING_URL = 'https://www.youtube.com/results?search_query='
@@ -23,11 +21,8 @@ def make_dict_from_list(_urls):
     return url_dict
 
 def add_data_to_firestore(_data):
-    cred = credentials.Certificate("serviceAccountKey.json")
-    firebase_admin.initialize_app(cred)
-    db = firestore.client()
     db.collection('rickroll').document('urls').set(_data)
 
 urls = get_urls_from_youtube_searching()
 data = make_dict_from_list(urls)
-# add_data_to_firestore(data)
+add_data_to_firestore(data)
