@@ -1,5 +1,5 @@
 from checker import db
-#TODO: get library for downloading video from yt by url for it
+#TODO: get library for downloading video from yt by url
 
 def download(url: str, path_to_store: str):
     pass
