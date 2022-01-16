@@ -8,6 +8,11 @@ def checking_with_perceptron(video, model):
         return True
     return False
 
+def train_model(X, y):
+    model = creating_model()
+    model.compile(optimizer='adam', loss='binary_crossentropy')
+    model.fit(X, y, epochs=200, validation_split=.2)
+    return model
 
 def creating_model():
     activation = relu(.2)
@@ -18,11 +23,3 @@ def creating_model():
         ]
     )
     return model
-
-
-def train_model(X, y):
-    model = creating_model()
-    model.compile(optimizer='adam', loss='binary_crossentropy')
-    model.fit(X, y, epochs=200, validation_split=.2)
-    return model
-
