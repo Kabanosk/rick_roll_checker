@@ -1,0 +1,4 @@
+firebase_admin
+flask
+lin_algebra
+tensorflow
