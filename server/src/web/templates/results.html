@@ -7,12 +7,18 @@
 {% block title %}Results{% endblock %}
 
 {% block content %}
-    {% if is_rick_roll %}
-        <h1>Be careful it can be Rick Roll</h1>
-    {% else %}
-        <h1>That is not Rick Roll</h1>
-    {% endif %}
-    <form method="post">
-        <input type="submit" name="back" value="Check next link!">
-    </form>
+    <div style="height: 15em;"></div>
+    <div class="col-sm-3"></div>
+    <div class="col-sm-5 text-center">
+        {% if is_rick_roll %}
+            <h1>Be careful it can be Rick Roll</h1>
+        {% else %}
+            <h1>That is not Rick Roll</h1>
+        {% endif %}
+        <div class="col-sm-4"></div>
+        <form method="post">
+            <input type="submit" name="back" value="Check next link!" class="btn-default col-sm-3"
+                           style="width: 35%; height: 3em; margin: 1em 0; font-size: 1.2em">
+        </form>
+    </div>
 {% endblock %}
