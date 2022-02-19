@@ -1,0 +1,30 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block head %}
+    {{super()}}
+{% endblock %}
+
+{% block title %}Rick Roll checker{% endblock %}
+
+{% block content %}
+<div style="height: 10em;"></div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-7">
+            <form method="post">
+                <label style="font-size: 3em">Enter the url to see is that rick roll:<br>
+                    <div class="col-sm-1"></div>
+                    <input name="url_input" id="url_input" style="width: 80%; font-size: .5em"><br>
+                </label>
+            </form>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <form method="post">
+                    <input type="submit" name="url_input" class="btn-primary col-sm-3" value="Show me"
+                           style="width: 35%; height: 3em; margin: 1em 2em; font-size: 1.2em">
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

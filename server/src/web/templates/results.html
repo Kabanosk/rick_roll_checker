@@ -1,25 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Results</title>
-</head>
-<body>
+{% extends 'bootstrap/base.html' %}
+
+{% block head %}
+    {{super()}}
+{% endblock %}
+
+{% block title %}Results{% endblock %}
+
+{% block content %}
     {% if is_rick_roll %}
         <h1>Be careful it can be Rick Roll</h1>
     {% else %}
         <h1>That is not Rick Roll</h1>
     {% endif %}
     <form method="post">
-        <input type="submit" name="back" value="Check another link!">
+        <input type="submit" name="back" value="Check next link!">
     </form>
-    <form method="post">
-        <br><br>
-        <label>
-            You can also add to our email list. We will write to you about our future projects<br>
-            <input name="email">
-        </label><br>
-        <input type="submit" name="email1" value="Add me to the email list">
-    </form>
-</body>
-</html>
+{% endblock %}

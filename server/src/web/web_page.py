@@ -1,9 +1,23 @@
 from flask import Flask, render_template, redirect, request, url_for
+from flask_bootstrap import Bootstrap
 
-import checker
-from checker import is_rick_roll
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+
+cred = credentials.Certificate("../serviceAccountKey.json")
+firebase_admin.initialize_app(cred)
+db = firestore.client()
+
+def is_in_db(user_url):
+    urls = db.collection('rickroll').document('urls').get().to_dict()
+    for url in urls:
+        if url in user_url:
+            return True
+    return False
 
 app = Flask(__name__, template_folder='templates')
+bootstrap = Bootstrap(app)
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home', methods=['GET', 'POST'])
@@ -12,29 +26,16 @@ def index():
     if request.method == 'POST':
         url = request.form.get('url_input')
         return redirect(url_for('results', url=url))
-    return render_template('index.html')
+    return render_template('main.html')
 
 
 @app.route('/results/<path:url>', methods=['GET', 'POST'])
 def results(url):
     if request.method == 'POST':
-        if request.form.get('back') == 'Check another link!':
+        if request.form.get('back') == 'Check next link!':
             return redirect(url_for('index'))
-        if request.form.get('email1') is not None:
-            db = checker.db
-            new_email = request.form.get('email')
-            emails = db.collection('users').document('emails').get().to_dict()
-            last_id = int(list(emails.keys())[-1])
-            emails[str(last_id+1)] = new_email
-            db.collection('users').document('emails').set(emails)
-            return redirect(url_for('thanks'))
     return render_template('results.html',
-                           is_rick_roll=is_rick_roll(url))
+                           is_rick_roll=is_in_db(url))
 
-@app.route('/thanks', methods=['GET', 'POST'])
-def thanks():
-    if request.method == 'POST':
-        return redirect(url_for('index'))
-    return render_template('thanks.html')
-
-app.run()
+if __name__ == '__main__':
+    app.run()
